@@ -570,6 +570,6 @@ CampusFind was developed as a practical academic project to apply concepts of we
 
 \*\*Developed by Dibyaprotim Borah\*\*
 
-B.Tech – Computer Science and Engineering
+B.Tech – Computer Science and Engineering (Sunstone) Industry Integrate
 
 Assam down town University (ADTU)
