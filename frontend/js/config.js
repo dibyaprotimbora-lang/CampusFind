@@ -1,5 +1,5 @@
-/*
+﻿/*
  * CampusFind API Configuration
- * Change the API_BASE_URL when deploying the backend.
+ * Production backend hosted on Render.
  */
-window.CAMPUSFIND_API_BASE = "http://localhost:5000";
+window.CAMPUSFIND_API_BASE = "https://campusfind-api-ct06.onrender.com";
