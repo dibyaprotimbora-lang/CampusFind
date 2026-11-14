@@ -1,0 +1,382 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Report an Item | CampusFind</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/genz-theme.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            <span class="logo-icon">✦</span>
+            <span>Campus<span class="logo-highlight">Find</span></span>
+        </a>
+
+        <button
+            class="mobile-menu-toggle"
+            id="mobileMenuToggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+        <nav class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="index.html">Browse Items</a>
+            <a href="report-item.html" class="active">Report Item</a>
+            <a href="my-claims.html">My Claims</a>
+            <a href="claims-received.html">Claims Received</a>
+            <a href="#" id="logoutLink">Logout</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="login.html" class="login-btn">Log in</a>
+        </div>
+
+    </header>
+
+
+    <main class="report-page">
+
+        <div class="report-container">
+
+            <div class="report-heading">
+
+                <span class="section-eyebrow">
+                    CAMPUS COMMUNITY
+                </span>
+
+                <h1>Let's get it <span>back home.</span></h1>
+
+                <p>
+                    A few details can make someone's day. ✨
+                    Let's get it back to the right person.
+                </p>
+
+            </div>
+
+
+            <form id="reportForm" class="report-form">
+
+                <div class="form-section">
+
+                    <h2>What's the story? 👀</h2>
+
+                    <p class="form-section-description">
+                        Did it go missing, or did you find it?
+                    </p>
+
+                    <div class="report-type-options">
+
+                        <label class="report-type-card">
+
+                            <input
+                                type="radio"
+                                name="type"
+                                value="lost"
+                                required
+                            >
+
+                            <span class="report-type-icon">🔍</span>
+
+                            <span class="report-type-title">
+                                I Lost Something
+                            </span>
+
+                            <span class="report-type-description">
+                                Help me find my belongings.
+                            </span>
+
+                        </label>
+
+
+                        <label class="report-type-card">
+
+                            <input
+                                type="radio"
+                                name="type"
+                                value="found"
+                                required
+                            >
+
+                            <span class="report-type-icon">🎒</span>
+
+                            <span class="report-type-title">
+                                I Found Something
+                            </span>
+
+                            <span class="report-type-description">
+                                Help me return an item.
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <h2>The details ✍️</h2>
+
+                    <p class="form-section-description">
+                        Add the little details that make it recognisable.
+                    </p>
+
+
+                    <div class="form-grid">
+
+                        <div class="form-group full-width">
+
+                            <label for="title">
+                                Item Name *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                placeholder="e.g. Black wireless earbuds"
+                                maxlength="100"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category *
+                            </label>
+
+                            <select
+                                id="category"
+                                name="category"
+                                required
+                            >
+
+                                <option value="">
+                                    Select category
+                                </option>
+
+                                <option value="electronics">
+                                    Electronics
+                                </option>
+
+                                <option value="accessories">
+                                    Accessories
+                                </option>
+
+                                <option value="documents">
+                                    Documents
+                                </option>
+
+                                <option value="books">
+                                    Books
+                                </option>
+
+                                <option value="clothing">
+                                    Clothing
+                                </option>
+
+                                <option value="other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="date">
+                                Date *
+                            </label>
+
+                            <input
+                                type="date"
+                                id="date"
+                                name="date"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label for="location">
+                                Location *
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                name="location"
+                                placeholder="e.g. University Library"
+                                maxlength="150"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label for="description">
+                                Description *
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                rows="5"
+                                maxlength="1000"
+                                placeholder="Describe the item, its color, identifying features, or any other useful details..."
+                                required
+                            ></textarea>
+
+                            <span class="field-hint">
+                                Avoid sharing sensitive personal information.
+                            </span>
+
+                        </div>
+
+
+                        <div class="form-group full-width">
+
+                            <label for="image">
+                                Item Photo (Optional)
+                            </label>
+
+                            <input
+                                type="file"
+                                id="image"
+                                name="image"
+                                accept="image/jpeg,image/png,image/webp"
+                            >
+
+                            <span class="field-hint">
+                                JPG, PNG, or WebP. Maximum size: 5 MB.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-notice">
+
+                    <span>🔒</span>
+
+                    <p>
+                        Your report will be visible to other users.
+                        Do not include passwords, financial details,
+                        or other sensitive information.
+                    </p>
+
+                </div>
+
+
+                <div id="reportMessage"
+                     class="report-message"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+
+                <div class="form-actions">
+
+                    <a href="index.html" class="cancel-btn">
+                        Cancel
+                    </a>
+
+                    <button type="submit" class="submit-report-btn">
+                        Submit Report →
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <div class="footer-brand">
+
+            <a href="index.html" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>Campus<span class="logo-highlight">Find</span></span>
+            </a>
+
+            <p>
+                Helping campus belongings find their way home.
+            </p>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 CampusFind. Academic project for ADTU.
+            </p>
+
+            <p>
+                Built with care for the campus community.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+    <script src="js/config.js"></script>
+<script src="js/report.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("mobileMenuToggle");
+            const navLinks = document.querySelector(".navbar .nav-links");
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            menuToggle.addEventListener("click", function () {
+                const isOpen = navLinks.classList.toggle("mobile-menu-open");
+
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+            });
+
+            navLinks.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("mobile-menu-open");
+                    menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.textContent = "☰";
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

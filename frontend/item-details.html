@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Details | CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/genz-theme.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">CampusFind</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="report-item.html">Report Item</a>
+            <a href="my-claims.html">My Claims</a>
+        </nav>
+    </header>
+
+    <main class="item-details-container">
+        <a href="dashboard.html" class="back-link">
+            ← Back to Dashboard
+        </a>
+
+        <section id="itemDetails" class="item-details-card">
+            <p>Loading item details...</p>
+        </section>
+    </main>
+
+    <script src="js/config.js"></script>
+<script>
+        const API_URL = window.CAMPUSFIND_API_BASE + "/api/items";
+        const itemDetails = document.getElementById("itemDetails");
+
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, function (character) {
+                const entities = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#39;"
+                };
+
+                return entities[character];
+            });
+        }
+
+        async function loadItemDetails() {
+            const params = new URLSearchParams(window.location.search);
+            const itemId = params.get("id");
+
+            if (!itemId) {
+                itemDetails.innerHTML = "<p>Item ID is missing.</p>";
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `${API_URL}/${encodeURIComponent(itemId)}`
+                );
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(result.message || "Unable to load item.");
+                }
+
+                const item = result.item;
+
+                if (!item) {
+                    itemDetails.innerHTML = "<p>Item not found.</p>";
+                    return;
+                }
+
+                const type = item.type
+                    ? item.type.charAt(0).toUpperCase() + item.type.slice(1)
+                    : "Item";
+
+                const date = item.date
+                    ? new Date(item.date).toLocaleDateString()
+                    : "Not specified";
+                const imageUrl = typeof item.imageUrl === "string" &&
+                    item.imageUrl.startsWith("/uploads/")
+                    ? `${window.CAMPUSFIND_API_BASE}${item.imageUrl}`
+                    : "";
+
+                itemDetails.innerHTML = `
+                    <span class="item-type">${escapeHTML(type)}</span>
+
+                    ${imageUrl
+                        ? `<img class="item-details-photo" src="${escapeHTML(imageUrl)}" alt="Photo of ${escapeHTML(item.title || "reported item")}">`
+                        : `<div class="item-details-photo item-photo-placeholder">No photo available</div>`}
+
+                    <h1>${escapeHTML(item.title || "Untitled item")}</h1>
+
+                    <p class="item-description">
+                        ${escapeHTML(item.description || "No description provided.")}
+                    </p>
+
+                    <div class="item-detail-row">
+                        <strong>Category:</strong>
+                        <span>${escapeHTML(item.category || "Other")}</span>
+                    </div>
+
+                    <div class="item-detail-row">
+                        <strong>Location:</strong>
+                        <span>${escapeHTML(item.location || "Not specified")}</span>
+                    </div>
+
+                    <div class="item-detail-row">
+                        <strong>Date:</strong>
+                        <span>${escapeHTML(date)}</span>
+                    </div>
+
+                    <div class="item-detail-row">
+                        <strong>Status:</strong>
+                        <span>${escapeHTML(item.status || "available")}</span>
+                    </div>
+
+                    ${item.status === "returned" || item.status === "closed" ? `
+                        <button class="btn btn-secondary claim-button" type="button" disabled>
+                            ${item.status === "returned" ? "Item Returned" : "Claims Closed"}
+                        </button>
+                    ` : `
+                        <button id="claimItemBtn" class="btn btn-primary claim-button" type="button">
+                            Claim Item
+                        </button>
+                    `}
+                `;
+
+                const itemImage = itemDetails.querySelector(".item-details-photo");
+                if (itemImage && itemImage.tagName === "IMG") {
+                    itemImage.addEventListener("error", () => {
+                        const placeholder = document.createElement("div");
+                        placeholder.className =
+                            "item-details-photo item-photo-placeholder";
+                        placeholder.textContent = "No photo available";
+                        itemImage.replaceWith(placeholder);
+                    }, { once: true });
+                }
+
+                const claimButton = document.getElementById("claimItemBtn");
+
+                if (claimButton) {
+                    claimButton.addEventListener("click", async () => {
+                        const token = localStorage.getItem("token");
+
+                        if (!token) {
+                            window.location.href = "login.html";
+                            return;
+                        }
+
+                        claimButton.disabled = true;
+                        claimButton.textContent = "Submitting...";
+
+                        try {
+                            const response = await fetch(
+                                `${window.CAMPUSFIND_API_BASE}/api/claims/${encodeURIComponent(itemId)}`,
+                                {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Authorization": `Bearer ${token}`
+                                    },
+                                    body: JSON.stringify({
+                                        message: ""
+                                    })
+                                }
+                            );
+
+                            const result = await response.json();
+
+                            if (!response.ok) {
+                                throw new Error(result.message || "Unable to submit claim.");
+                            }
+
+                            alert("Claim submitted successfully!");
+                            claimButton.textContent = "Claim Submitted";
+                        } catch (error) {
+                            alert(error.message);
+                            claimButton.disabled = false;
+                            claimButton.textContent = "Claim Item";
+                        }
+                    });
+                }
+
+            } catch (error) {
+                console.error("Item details error:", error);
+
+                itemDetails.innerHTML =
+                    "<p>Unable to load item details. Please try again.</p>";
+            }
+        }
+
+        loadItemDetails();
+    </script>
+
+</body>
+</html>

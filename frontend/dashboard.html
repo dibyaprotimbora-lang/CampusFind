@@ -1,0 +1,129 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/genz-theme.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">CampusFind</div>
+
+        <button
+            class="mobile-menu-toggle"
+            id="mobileMenuToggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="report-item.html">Report Item</a>
+            <a href="index.html">Browse Items</a>
+            <a href="my-claims.html">My Claims</a>
+            <a href="claims-received.html">Claims Received</a>
+            <a href="#" id="logoutLink">Logout</a>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+
+        <section class="dashboard-welcome">
+            <h1>Hey, welcome back! ✨</h1>
+            <p>
+                Your campus corner for lost things, found things and happy reunions.
+            </p>
+        </section>
+
+        <section class="dashboard-actions">
+            <a href="report-item.html" class="btn btn-primary">
+                Report a Lost or Found Item
+            </a>
+
+            <a href="index.html" class="btn btn-secondary">
+                Browse Items
+            </a>
+
+            <a href="my-claims.html" class="btn btn-secondary">
+                My Claims
+            </a>
+
+            <a href="claims-received.html" class="btn btn-secondary">
+                Claims Received
+            </a>
+        </section>
+
+        <section class="dashboard-items">
+            <h2>Fresh on campus 👀</h2>
+
+            <div id="dashboardItems" class="items-grid">
+                <p>Loading items...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+    <script src="js/items.js"></script>
+
+    <script>
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "login.html";
+        }
+
+        const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+        if (user.name) {
+            document.querySelector(".dashboard-welcome h1").textContent =
+                `Welcome, ${user.name}!`;
+        }
+
+        document.getElementById("logoutLink").addEventListener("click", function (event) {
+            event.preventDefault();
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+
+            window.location.href = "login.html";
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("mobileMenuToggle");
+            const navLinks = document.querySelector(".navbar .nav-links");
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            menuToggle.addEventListener("click", function () {
+                const isOpen = navLinks.classList.toggle("mobile-menu-open");
+
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+            });
+
+            navLinks.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("mobile-menu-open");
+                    menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.textContent = "☰";
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

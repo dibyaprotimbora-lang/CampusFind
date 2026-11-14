@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus HQ ✨ | CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/genz-theme.css">
+    <style>
+        .admin-claim-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-width: 150px;
+        }
+        .admin-claim-action {
+            border: 0;
+            border-radius: 9px;
+            padding: 8px 12px;
+            font: inherit;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .admin-claim-action:hover:not(:disabled) {
+            transform: translateY(-1px);
+        }
+        .admin-claim-action:disabled {
+            cursor: wait;
+            opacity: 0.55;
+        }
+        .admin-claim-approve {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .admin-claim-reject {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .admin-claim-no-action {
+            color: #888;
+        }
+    </style>
+</head>
+<body class="admin-page">
+
+    <header class="navbar">
+        <div class="logo">CampusFind <span class="logo-highlight">Admin</span></div>
+
+        <button class="mobile-menu-toggle" id="adminMenuToggle"
+            type="button" aria-label="Toggle navigation" aria-expanded="false">
+            ☰
+        </button>
+
+        <nav class="nav-links" id="adminNav">
+            <a href="#overview" class="active" data-section="overview">Overview</a>
+            <a href="#items" data-section="items">Items</a>
+            <a href="#users" data-section="users">Users</a>
+            <a href="#claims" data-section="claims">Claims</a>
+            <a href="#" id="adminLogout">Logout</a>
+        </nav>
+    </header>
+
+    <main class="admin-container">
+
+        <section class="admin-welcome">
+            <div>
+                <span class="section-eyebrow">ADMINISTRATION</span>
+                <h1>Campus HQ ✨</h1>
+                <p>A little behind-the-scenes magic for the campus community.</p>
+            </div>
+            <span class="admin-role">Administrator</span>
+        </section>
+
+        <div id="adminMessage" class="admin-message">
+            Loading dashboard...
+        </div>
+
+        <section id="overviewSection" class="admin-section">
+            <h2>The campus pulse 📊</h2>
+
+            <div class="admin-stats">
+                <article class="admin-stat-card">
+                    <span>👥</span>
+                    <p>Total Users</p>
+                    <h3 id="totalUsers">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>📦</span>
+                    <p>Total Items</p>
+                    <h3 id="totalItems">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>🔍</span>
+                    <p>Lost Items</p>
+                    <h3 id="lostItems">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>🎒</span>
+                    <p>Found Items</p>
+                    <h3 id="foundItems">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>📋</span>
+                    <p>Total Claims</p>
+                    <h3 id="totalClaims">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>⏳</span>
+                    <p>Pending Claims</p>
+                    <h3 id="pendingClaims">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>✅</span>
+                    <p>Approved Claims</p>
+                    <h3 id="approvedClaims">—</h3>
+                </article>
+
+                <article class="admin-stat-card">
+                    <span>🎉</span>
+                    <p>Returned Items</p>
+                    <h3 id="returnedItems">—</h3>
+                </article>
+            </div>
+        </section>
+
+        <section id="itemsSection" class="admin-section" hidden>
+            <h2>Everything reported 📦</h2>
+            <input type="search" id="itemSearch"
+                class="admin-search" placeholder="Search items...">
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Type</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Reported By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTableBody">
+                        <tr><td colspan="6">Loading items...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="usersSection" class="admin-section" hidden>
+            <h2>The campus crew 👋</h2>
+            <input type="search" id="userSearch"
+                class="admin-search" placeholder="Search users...">
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Registered</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody">
+                        <tr><td colspan="4">Loading users...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="claimsSection" class="admin-section" hidden>
+            <h2>Reunion requests 💌</h2>
+
+            <div class="admin-table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Claimant</th>
+                            <th>Status</th>
+                            <th>Returned</th>
+                            <th>Submitted</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="claimsTableBody">
+                        <tr><td colspan="6">Loading claims...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p>© 2026 CampusFind. All rights reserved.</p>
+            <p>Administrator Panel</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

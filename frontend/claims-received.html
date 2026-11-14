@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claims Received | CampusFind</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/genz-theme.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="dashboard.html" class="logo">CampusFind</a>
+
+            <button
+                class="mobile-menu-toggle"
+                id="mobileMenuToggle"
+                type="button"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+            <div class="nav-links">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="index.html">Browse Items</a>
+                <a href="report-item.html">Report Item</a>
+                <a href="my-claims.html">My Claims</a>
+                <a href="claims-received.html" aria-current="page">Claims Received</a>
+                <a href="#" id="logoutBtn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="claims-container">
+        <h1>Claims Received</h1>
+        <p class="claims-description">
+            Someone thinks they found their missing piece. Take a look. 💌
+        </p>
+
+        <div id="claimsMessage" class="claims-message" role="status" aria-live="polite">
+            Loading received claims...
+        </div>
+        <div id="receivedClaimsList" class="claims-list"></div>
+    </main>
+
+    <script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+    <script src="js/claims-received.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("mobileMenuToggle");
+            const navLinks = document.querySelector(".navbar .nav-links");
+
+            if (!menuToggle || !navLinks) {
+                return;
+            }
+
+            menuToggle.addEventListener("click", function () {
+                const isOpen = navLinks.classList.toggle("mobile-menu-open");
+
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+            });
+
+            navLinks.querySelectorAll("a").forEach(function (link) {
+                link.addEventListener("click", function () {
+                    navLinks.classList.remove("mobile-menu-open");
+                    menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.textContent = "☰";
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

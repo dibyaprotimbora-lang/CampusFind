@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CampusFind — Gen Z Design Preview</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/genz-theme.css">
+<style>
+.preview-wrap{max-width:1240px;width:92%;margin:0 auto;padding:48px 0 80px}
+.preview-label{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#147d72;font-weight:900}
+.preview-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center;padding:54px;border-radius:30px;background:linear-gradient(125deg,#e8fbf4,#f0edff 65%,#fff2e9);border:1px solid white;box-shadow:var(--cf-shadow)}
+.preview-hero h1{font-size:clamp(42px,6vw,70px);margin:15px 0}
+.preview-hero h1 span{color:#147d72}
+.preview-hero p{color:#738095;max-width:520px}
+.preview-visual{height:300px;display:grid;place-items:center;position:relative}
+.preview-orb{height:250px;width:250px;border-radius:43% 57% 52% 48%;background:linear-gradient(140deg,#b9f3e4,#d8d0ff);display:grid;place-items:center;font-size:100px;box-shadow:0 25px 60px #85cbbb55;transform:rotate(-8deg)}
+.preview-float{position:absolute;background:white;padding:12px 16px;border-radius:15px;box-shadow:var(--cf-shadow);font-size:12px;font-weight:800}
+.preview-float.one{right:0;top:20px}.preview-float.two{left:0;bottom:22px}
+.preview-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.preview-actions a{padding:13px 18px;border-radius:13px;text-decoration:none;font-weight:800}
+.preview-actions a:first-child{background:#147d72;color:white}.preview-actions a:last-child{background:white;color:#18263f;border:1px solid #e8eaf1}
+.preview-section{margin-top:55px}
+.preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:20px}
+.preview-item{background:white;border:1px solid #e8eaf1;border-radius:20px;padding:16px;box-shadow:var(--cf-shadow)}
+.preview-photo{height:135px;border-radius:15px;background:linear-gradient(135deg,#e5faf3,#eeeaff);display:grid;place-items:center;font-size:42px}
+.preview-chip{display:inline-block;margin:13px 0 6px;padding:6px 10px;border-radius:20px;background:#fff0e8;color:#b75e64;font-size:10px;font-weight:900}
+.preview-item p{color:#7a8799;font-size:12px}
+.preview-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.preview-links a{background:white;border:1px solid #e8eaf1;border-radius:12px;padding:10px 13px;text-decoration:none;font-size:12px;font-weight:800;color:#147d72}
+@media(max-width:760px){.preview-hero{grid-template-columns:1fr;padding:28px;text-align:center}.preview-hero p{margin:auto}.preview-actions{justify-content:center}.preview-grid{grid-template-columns:1fr}.preview-visual{height:230px}.preview-orb{height:190px;width:190px;font-size:75px}}
+</style>
+</head>
+<body>
+<header class="navbar"><a href="index.html" class="logo"><span class="logo-icon">✦</span>Campus<span class="logo-highlight">Find</span></a><nav class="nav-links"><a href="index.html">Home</a><a href="login.html">Log in</a><a href="register.html">Join the crew</a></nav></header>
+<main class="preview-wrap">
+<div class="preview-label">✦ CampusFind / visual refresh</div>
+<section class="preview-hero">
+<div><span class="hero-badge">🌿 your campus, your people</span><h1>Lost something?<br><span>Let's bring it home.</span></h1><p>Your campus corner for lost things, found things and happy reunions. Post it, spot it, get it back. Easy as that.</p><div class="preview-actions"><a href="report-item.html">＋ Report an item</a><a href="index.html#items">🔎 Browse finds</a></div></div>
+<div class="preview-visual"><div class="preview-orb">🎒</div><div class="preview-float one">✨ Found something?<br><small>Help it find its person.</small></div><div class="preview-float two">💚 little things, big reunions</div></div>
+</section>
+<section class="preview-section"><div class="preview-label">✦ fresh on campus</div><h2>Some recent finds 👀</h2><p>Friendly cards, soft colours and the details that matter.</p><div class="preview-grid">
+<article class="preview-item"><div class="preview-photo">🎧</div><span class="preview-chip">LOST ITEM</span><h3>Wireless earbuds</h3><p>📍 University Library · 📅 Recently reported</p></article>
+<article class="preview-item"><div class="preview-photo">📚</div><span class="preview-chip" style="background:#e4f7ed;color:#16805d">FOUND ITEM</span><h3>Notebook / journal</h3><p>📍 Main Block · 📅 Recently reported</p></article>
+<article class="preview-item"><div class="preview-photo">🔑</div><span class="preview-chip">LOST ITEM</span><h3>Keychain</h3><p>📍 Cafeteria · 📅 Recently reported</p></article>
+</div></section>
+<section class="preview-section"><div class="preview-label">✦ take a look around</div><h2>Every page, same vibe 💫</h2><p>Open any page to preview its redesigned layout. Existing app functions are retained.</p><div class="preview-links"><a href="index.html">Homepage</a><a href="login.html">Login</a><a href="register.html">Register</a><a href="dashboard.html">Dashboard</a><a href="report-item.html">Report Item</a><a href="my-claims.html">My Claims</a><a href="claims-received.html">Claims Received</a><a href="admin.html">Admin</a></div></section>
+</main><footer class="footer"><div class="footer-bottom"><p>CampusFind ✦ made for campus people, by campus people.</p></div></footer>
+</body></html>

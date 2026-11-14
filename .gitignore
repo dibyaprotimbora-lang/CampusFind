@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+backend/node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Uploaded user images
+uploads/*
+!uploads/.gitkeep
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Backups
+backups/
+
+# Editor settings
+.vscode/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Local duplicate and temporary files
+upload-files/
+Install-CampusFind-Admin-Claims.ps1
+GENZ_REDESIGN_README.txt
+
+# Old code backups
+*.backup.js
+*.backup2.js
+*.stage*.backup.js
+
+# Local development utilities
+backend/check-user-role.js
+backend/test-claims.js
